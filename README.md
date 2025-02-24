@@ -21,3 +21,4 @@ This project demonstrates the implementation of a cloud-native infrastructure on
 
 ## Architecture
 
+![AKS arch](https://github.com/user-attachments/assets/239d08ae-2212-4b29-9dde-4203a19cbc2b)

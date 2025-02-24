@@ -19,5 +19,5 @@ This project demonstrates the implementation of a cloud-native infrastructure on
 3. Deploy applications to AKS.
 4. Configure Jenkins for CI/CD.
 
-## License
-This project is licensed under the MIT License.
+## Architecture
+

@@ -1,0 +1,12 @@
+
+resource_group_name="rg-dnk-hub-cus"
+location = "centralus"
+vnet-cus-hub="vnet-cus-hub"
+GatewaySubnet="GatewaySubnet"
+AzureFirewallSubnet="AzureFirewallSubnet"
+snet-hub-mgmt-01-cus="snet-hub-mgmt-01-cus"
+snet-hub-appgw-01-cus="snet-hub-appgw-01-cus"
+snet-hub-acr-01-cus="snet-hub-acr-01-cus"
+kv-dnk-hub-cus="kv3-dnk-hub-cus"
+app-gw-pip="app-gw-pip"
+app-gw="app-gw"

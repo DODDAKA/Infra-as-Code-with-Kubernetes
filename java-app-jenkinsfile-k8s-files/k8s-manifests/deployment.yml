@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-spring-app
+  labels:
+    app: my-spring-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-spring-app
+  template:
+    metadata:
+      labels:
+        app: my-spring-app
+    spec:
+      containers:
+      - name: my-spring-app
+        image: jenkinsacr.azurecr.io/my-spring-app:latest
+        #securityContext:
+             #privileged: true
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "prod"
+        # Add these environment variables
+        - name: CREATOR_1
+          #value: "Team-A"  # Replace with actual value or use secret/configmap
+          valueFrom:
+            configMapKeyRef:
+              name: creator-config          # The ConfigMap this value comes from.
+              key: first_person
+        - name: CREATOR_2
+          #value: "Team-B"  # Replace with actual value or use secret/configmap
+          valueFrom:
+            configMapKeyRef:
+              name: creator-config          # The ConfigMap this value comes from.
+              key: second_person
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        volumeMounts:
+              - name: azure
+                mountPath: /opt/app/logs
+                readOnly: false    
+      volumes:
+        - name: azure
+          persistentVolumeClaim: 
+              claimName: azurefile-pvc
+          #csi:
+            #driver: file.csi.azure.com
+            #volumeAttributes:
+                #secretName: azure-secret  # required
+                #shareName: filesharetest  # required
+                #mountOptions: 'dir_mode=0777,file_mode=0777,cache=strict,actimeo=30,nosharesock,nobrl'  # optional
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-spring-app
+  labels:
+    app: my-spring-app
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: my-spring-app

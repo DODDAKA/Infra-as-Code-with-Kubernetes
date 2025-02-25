@@ -1,0 +1,8 @@
+# resource "azurerm_storage_account" "test_stotage_acc" {
+#   name                     = "storageaccountstdnk"
+#   resource_group_name      = azurerm_resource_group.rg-dnk-hub-cus.name
+#   location                 = azurerm_resource_group.rg-dnk-hub-cus.location
+#   public_network_access_enabled = true   ############ It will Disble/Enable public access. Settings-> Networking -> Disable public access
+#   account_tier             = "Standard"
+#   account_replication_type = "LRS"
+# }

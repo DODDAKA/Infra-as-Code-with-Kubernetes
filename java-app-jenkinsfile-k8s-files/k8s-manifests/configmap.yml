@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: creator-config
+data:
+ first_person: "Naveen"
+ second_person: "Doddaka"

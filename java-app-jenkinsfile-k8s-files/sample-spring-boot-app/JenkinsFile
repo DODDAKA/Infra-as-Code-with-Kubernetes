@@ -1,0 +1,94 @@
+pipeline {
+    agent any
+    environment {
+        // Define ACR registry URL (replace with your ACR name)
+        ACR_REGISTRY = "jenkinsacr.azurecr.io"
+        // Define AKS cluster name and resource group
+        AKS_CLUSTER_NAME = "my-aks-cluster"
+        AKS_RESOURCE_GROUP = "my-resource-group"
+        APP_ID = "Application_ID"
+        CLIENT_SECRET = "Client_Secret"
+        TENANT_ID = "tenant_Id"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Use the credential ID for GitHub access
+                sh 'echo passed'
+            }
+        }
+
+        stage('Build and Test') {
+            steps {
+                sh 'ls -ltr'
+                // Build the project and create a JAR file
+                sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean install'
+            }
+        }
+
+        stage('Login to ACR') {
+            steps {
+                script {
+                    // Use the Jenkins credentials securely with the 'withCredentials' block
+                    withCredentials([usernamePassword(credentialsId: 'ACR_Cred', usernameVariable: 'ACR_USERNAME', passwordVariable: 'ACR_PASSWORD')]) {
+                        // Login to Azure Container Registry (ACR) using credentials
+                        sh """
+                            az acr login --name $ACR_REGISTRY --username $ACR_USERNAME --password $ACR_PASSWORD
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Navigate to the directory containing the Dockerfile and build the image
+                    sh """
+                        cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
+                        docker build -t ${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID} .
+                    """
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    // Push the Docker image to ACR
+                    sh """
+                        docker push ${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID}
+                    """
+                }
+            }
+        }
+
+        stage('Deploy to AKS') {
+            steps {
+                script {
+                    // Authenticate kubectl to the AKS cluster
+                    withCredentials([usernamePassword(credentialsId: 'azure-sp', usernameVariable: 'AZURE_CLIENT_ID', passwordVariable: 'AZURE_CLIENT_SECRET')]) {
+                        sh '''
+                            az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant "2f0b93a1-027d-4ff3-8c5e-b0eade655f77"
+                        '''
+                    }
+
+                    sh """
+                        az aks get-credentials --resource-group ${AKS_RESOURCE_GROUP} --name ${AKS_CLUSTER_NAME} --overwrite-existing
+                    """
+                    
+                    // Print the current working directory for debugging
+                    sh 'pwd'
+
+
+                    // Update the Kubernetes deployment manifest with the new image tag
+                    sh """
+                        cd java-maven-sonar-argocd-helm-k8s/k8s &&
+                        sed -i 's|${ACR_REGISTRY}/my-spring-app:.*|${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID}|g' deployment.yml &&
+                        kubectl apply -f .
+                    """
+                }
+            }
+        }
+    }
+}

@@ -28,12 +28,12 @@
 
 
 ############################################################# RBAC ##################3
-# data "azurerm_client_config" "example" {
-# }
+data "azurerm_client_config" "example" {
+}
 
-# resource "azurerm_role_assignment" "example" {
-#   scope                = azurerm_key_vault.kv-dnk-hub-cus.id
-#   role_definition_name = "Key Vault Administrator"
-#   principal_id         =  "7b0317d1-a499-4812-8f06-d975294d7d51"
-# }
-##"7b0317d1-a499-4812-8f06-d975294d7d51"
+resource "azurerm_role_assignment" "example" {
+  scope                = azurerm_key_vault.kv-dnk-hub-cus.id
+  role_definition_name = "Key Vault Administrator"
+  principal_id         =  "7b0317d1-a499-4812-8f06-d975294d7d51"
+}
+#"7b0317d1-a499-4812-8f06-d975294d7d51"

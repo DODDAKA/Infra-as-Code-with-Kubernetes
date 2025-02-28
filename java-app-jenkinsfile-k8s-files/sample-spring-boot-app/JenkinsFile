@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh 'ls -ltr'
                 // Build the project and create a JAR file
-                sh 'cd ../spring-boot-app && mvn clean install'
+                sh 'cd sample-spring-boot-app && mvn clean install'
             }
         }
 
@@ -45,8 +45,8 @@ pipeline {
                 script {
                     // Navigate to the directory containing the Dockerfile and build the image
                     sh """
-                        cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
-                        docker build -t ${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID} .
+                        cd sample-spring-boot-app
+                        docker build -t ${ACR_REGISTRY}/sample-spring-boot-app:${env.BUILD_ID} .
                     """
                 }
             }
@@ -83,8 +83,8 @@ pipeline {
 
                     // Update the Kubernetes deployment manifest with the new image tag
                     sh """
-                        cd java-maven-sonar-argocd-helm-k8s/k8s &&
-                        sed -i 's|${ACR_REGISTRY}/my-spring-app:.*|${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID}|g' deployment.yml &&
+                        cd ../k8s-manifests &&
+                        sed -i 's|${ACR_REGISTRY}/sample-spring-boot-app:.*|${ACR_REGISTRY}/sample-spring-boot-app:${env.BUILD_ID}|g' deployment.yml &&
                         kubectl apply -f .
                     """
                 }

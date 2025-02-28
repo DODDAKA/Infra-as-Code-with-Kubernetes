@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         // Define ACR registry URL (replace with your ACR name)
-        ACR_REGISTRY = "jenkinsacr.azurecr.io"
+        ACR_REGISTRY = "acrimagesdnk.azurecr.io"
         // Define AKS cluster name and resource group
         AKS_CLUSTER_NAME = "akslearn"
         AKS_RESOURCE_GROUP = "rg-dnk"

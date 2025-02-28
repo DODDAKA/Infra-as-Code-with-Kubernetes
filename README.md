@@ -6,7 +6,7 @@ This project demonstrates the implementation of a cloud-native infrastructure on
 ## Key Components
 - **Infrastructure as Code**: Terraform
 - **Container Orchestration**: Azure Kubernetes Service (AKS)
-- **Networking**: VNETS, SNETS, Route Tables, Hub and Spoke Architecture, Private Endpoints, Private DNS Zones, NAT Gateway, Express Route
+- **Networking**: VNETS, SNETS, Route Tables, Hub and Spoke Architecture, Private Endpoints, Private DNS Zones, NAT Gateway, Express Route, Azure Bastion
 - **Load Balancing**: Azure Front Door, Application Gateway, Standard Load Balancer
 - **Security**: Azure Key Vault(RBAC and Vault Access Policy), Network Security Groups (NSGs), RBAC, Azure Firewall(Basic)
 - **Data Services**: Azure PostgreSQL, Redis Cache, Storage Accounts(File Share, Blob Storage)

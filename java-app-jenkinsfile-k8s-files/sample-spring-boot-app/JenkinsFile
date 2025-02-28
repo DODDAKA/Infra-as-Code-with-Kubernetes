@@ -4,11 +4,11 @@ pipeline {
         // Define ACR registry URL (replace with your ACR name)
         ACR_REGISTRY = "jenkinsacr.azurecr.io"
         // Define AKS cluster name and resource group
-        AKS_CLUSTER_NAME = "my-aks-cluster"
-        AKS_RESOURCE_GROUP = "my-resource-group"
-        APP_ID = "Application_ID"
-        CLIENT_SECRET = "Client_Secret"
-        TENANT_ID = "tenant_Id"
+        AKS_CLUSTER_NAME = "akslearn"
+        AKS_RESOURCE_GROUP = "rg-dnk"
+        //APP_ID = "Application_ID"
+        //CLIENT_SECRET = "Client_Secret"
+        //TENANT_ID = "tenant_Id"
     }
     stages {
         stage('Checkout') {

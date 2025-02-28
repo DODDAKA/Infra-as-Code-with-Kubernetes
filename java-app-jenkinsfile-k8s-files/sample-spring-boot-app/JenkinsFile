@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh 'ls -ltr'
                 // Build the project and create a JAR file
-                sh 'cd sample-spring-boot-app && mvn clean install'
+                sh 'cd java-app-jenkinsfile-k8s-files/sample-spring-boot-app && mvn clean install'
             }
         }
 
@@ -45,7 +45,7 @@ pipeline {
                 script {
                     // Navigate to the directory containing the Dockerfile and build the image
                     sh """
-                        cd sample-spring-boot-app
+                        cd java-app-jenkinsfile-k8s-files/sample-spring-boot-app
                         docker build -t ${ACR_REGISTRY}/sample-spring-boot-app:${env.BUILD_ID} .
                     """
                 }

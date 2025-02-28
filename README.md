@@ -23,6 +23,4 @@ This project demonstrates the implementation of a cloud-native infrastructure on
 4. Configure Jenkins for CI/CD.
 
 ## Architecture
-
-![AKS arch](https://github.com/user-attachments/assets/239d08ae-2212-4b29-9dde-4203a19cbc2b)
 ![Final_PRJ_Visio](https://github.com/user-attachments/assets/9ea2b9b3-3bb8-4a8d-8836-852ef6441047)

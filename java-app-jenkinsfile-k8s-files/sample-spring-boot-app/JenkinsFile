@@ -83,7 +83,7 @@ pipeline {
 
                     // Update the Kubernetes deployment manifest with the new image tag
                     sh """
-                        cd ../k8s-manifests &&
+                        cd java-app-jenkinsfile-k8s-files/k8s-manifests &&
                         sed -i 's|${ACR_REGISTRY}/sample-spring-boot-app:.*|${ACR_REGISTRY}/sample-spring-boot-app:${env.BUILD_ID}|g' deployment.yml &&
                         kubectl apply -f .
                     """

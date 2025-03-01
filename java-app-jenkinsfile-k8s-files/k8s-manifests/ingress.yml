@@ -8,6 +8,7 @@ metadata:
     #appgw.ingress.kubernetes.io/appgw-ssl-certificate: "my-ssl-cert"  # Name of the SSL cert in Azure App GW
     #appgw.ingress.kubernetes.io/backend-path-prefix: "/"  # Rewrite path if needed
 spec:
+  ingressClassName: azure-application-gateway
   #tls:
     #- hosts:
        # - myapp.example.com  # Replace with your domain

@@ -57,7 +57,7 @@ pipeline {
                 script {
                     // Push the Docker image to ACR
                     sh """
-                        docker push ${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID}
+                        docker push ${ACR_REGISTRY}/sample-spring-boot-app:${env.BUILD_ID}
                     """
                 }
             }

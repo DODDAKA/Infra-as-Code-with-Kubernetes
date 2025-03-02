@@ -24,3 +24,12 @@ This project demonstrates the implementation of a cloud-native infrastructure on
 
 ## Architecture
 ![Final_PRJ_Visio](https://github.com/user-attachments/assets/9ea2b9b3-3bb8-4a8d-8836-852ef6441047)
+
+## Sample screenshots for evidence
+![Listerner_proof](https://github.com/user-attachments/assets/6e15718d-c9a5-4d26-ab3a-929c98bb573a)
+![Listenr2_proff](https://github.com/user-attachments/assets/efe3038a-5a3e-4193-abc7-d1661af8c29f)
+![Backend_healh](https://github.com/user-attachments/assets/7e4cdc77-2822-4dc6-80c5-b194e0749c27)
+![web_proof](https://github.com/user-attachments/assets/dc500ce1-9f10-4333-acb4-8a9da558415a)
+
+
+

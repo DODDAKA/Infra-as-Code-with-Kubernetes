@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: my-spring-app
-        image: acrimagesdnk.azurecr.io/sample-spring-boot-app:latest
+        image: aksregistrydnk.azurecr.io/sample-spring-boot-app:latest
         #securityContext:
              #privileged: true
         ports:

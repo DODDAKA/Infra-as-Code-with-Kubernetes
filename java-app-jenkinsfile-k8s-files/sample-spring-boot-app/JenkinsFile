@@ -2,10 +2,10 @@ pipeline {
     agent any
     environment {
         // Define ACR registry URL (replace with your ACR name)
-        ACR_REGISTRY = "acrimagesdnk.azurecr.io"
+        ACR_REGISTRY = "aksregistrydnk.azurecr.io"
         // Define AKS cluster name and resource group
-        AKS_CLUSTER_NAME = "akslearn"
-        AKS_RESOURCE_GROUP = "rg-dnk"
+        AKS_CLUSTER_NAME = "aksdnkdev"
+        AKS_RESOURCE_GROUP = "rg-dnk-dev-spoke"
         //APP_ID = "Application_ID"
         //CLIENT_SECRET = "Client_Secret"
         //TENANT_ID = "tenant_Id"

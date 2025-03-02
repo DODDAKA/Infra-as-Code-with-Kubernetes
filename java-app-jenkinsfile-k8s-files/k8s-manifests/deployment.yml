@@ -44,14 +44,14 @@ spec:
           limits:
             memory: "1Gi"
             cpu: "500m"
-        volumeMounts:
-              - name: azure
-                mountPath: /opt/app/logs
-                readOnly: false    
-      volumes:
-        - name: azure
-          persistentVolumeClaim: 
-              claimName: azurefile-pvc
+        #volumeMounts:
+              #- name: azure
+                #mountPath: /opt/app/logs
+                #readOnly: false    
+      #volumes:
+       # - name: azure
+        #  persistentVolumeClaim: 
+         #     claimName: azurefile-pvc
           #csi:
             #driver: file.csi.azure.com
             #volumeAttributes:

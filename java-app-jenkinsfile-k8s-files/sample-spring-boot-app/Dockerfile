@@ -12,5 +12,5 @@ WORKDIR /opt/app
 COPY ${artifact} app.jar
 
 # Use shell form for redirection
-ENTRYPOINT ["sh", "-c", "java -jar app.jar > /opt/app/logs/app.log 2>&1"]
-#ENTRYPOINT ["java","-jar","app.jar"]
+#ENTRYPOINT ["sh", "-c", "java -jar app.jar > /opt/app/logs/app.log 2>&1"]
+ENTRYPOINT ["java","-jar","app.jar"]

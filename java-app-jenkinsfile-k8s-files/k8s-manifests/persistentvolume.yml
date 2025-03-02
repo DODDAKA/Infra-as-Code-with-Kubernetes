@@ -13,12 +13,12 @@ spec:
   storageClassName: azurefile-csi
   csi:
     driver: file.csi.azure.com
-    volumeHandle: "rg-dnk#stakspvctest2#filesharetest"  # make sure this volumeid is unique for every identical share in the cluster
+    volumeHandle: "MC_rg-dnk-dev-spoke_aksdnkdev_centralus#stakspvfileshare#filesharetest"  # make sure this volumeid is unique for every identical share in the cluster
     volumeAttributes:
-      resourceGroup: rg-dnk
-      storageAccount: stakspvctest2
-      shareName: filesharetest
-      server: stakspvctest2.privatelink.file.core.windows.net   ###stakspvctest.privatelink.file.core.windows.net
+      resourceGroup: "MC_rg-dnk-dev-spoke_aksdnkdev_centralus"
+      storageAccount: "stakspvfileshare"
+      shareName: "filesharetest"
+      server: "stakspvfileshare.privatelink.file.core.windows.net"   ###stakspvctest.privatelink.file.core.windows.net
     nodeStageSecretRef:
       name: azure-secret
       namespace: default

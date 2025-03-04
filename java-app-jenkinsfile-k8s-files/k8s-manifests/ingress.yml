@@ -14,7 +14,7 @@ spec:
        # - myapp.example.com  # Replace with your domain
       #secretName: my-tls-secret  # Optional: Use if storing cert in Kubernetes Secret
   rules:
-    - host: myapp.example.com  # Replace with your domain
+    - host: "fddefaultendpoint-a6drgka7fdbjdnbt.z02.azurefd.net" #myapp.example.com  # Replace with your domain
       http:
         paths:
           - path: /

@@ -1,0 +1,67 @@
+
+trigger:
+  //branches:
+    //include:
+      //- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  javaVersion: '11'
+  appName: 'spring-azure-demo2'
+  packagePath: '$(Build.ArtifactStagingDirectory)/*.jar'
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - checkout: self  # Fixed checkout syntax
+      
+    - task: JavaToolInstaller@0
+      inputs:
+        versionSpec: $(javaVersion)
+        jdkArchitectureOption: 'x64'
+        jdkSourceOption: 'PreInstalled'
+
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        goals: 'clean install'
+        publishJUnitResults: false
+
+    - task: CopyFiles@2
+      inputs:
+        contents: 'target/*.jar'
+        targetFolder: $(Build.ArtifactStagingDirectory)
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: $(Build.ArtifactStagingDirectory)
+        artifactName: 'java-app'
+
+- stage: Deploy
+  dependsOn: Build
+  jobs:
+  - job: Deploy
+    steps:
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        artifactName: 'java-app'
+        downloadPath: $(System.ArtifactsDirectory)
+
+#     - task: AzureWebApp@2
+#       inputs:
+#         appType: 'webAppLinux'
+#         appName: $(appName)
+#         package: $(packagePath)
+#         deploymentMethod: 'publishProfile'
+#         publishProfile: $(AZUREAPPSERVICE_PUBLISHPROFILE)
+    - task: AzureWebApp@1
+      inputs:
+          azureSubscription: 'Mahesh - 6/3/25(3ce0a1fd-a1bb-46f5-afcb-74b712009503)'
+          appType: 'webApp'
+          appName: 'azwebappp'
+          package: '$(Build.ArtifactStagingDirectory)/**/*.jar'  # or use the zip path if you created it
+          deploymentMethod: 'auto'
